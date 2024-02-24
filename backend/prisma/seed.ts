@@ -29,7 +29,7 @@ async function seed() {
       logo: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400/c31566130735783.6186962073880.png',
     },
     {
-      title: 'Junior Python developer',
+      title: 'Junior Python dev',
       description:
         'As a Junior Python Developer, you will be part of our development team, assisting in the design, development, and maintenance of software applications using the Python programming language. You will work closely with experienced developers and gain hands-on experience in building robust and scalable solutions. This is a great opportunity to grow your skills and contribute to real-world projects while being mentored by senior team members.',
       logo: 'https://huisstijlblog.nl/wp-content/uploads/2016/03/Amazon-logo-1024x768.png',
