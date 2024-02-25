@@ -6,6 +6,10 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 import { VacancyCardProps } from "./types/vacancy-card.type";
 import CandidatesModal from "./candidates-modal.comp";
 import { styled } from "@mui/system";
+import { useDispatch } from "react-redux";
+import { addCandidate } from "../app/candidate/store/candidate.action";
+import { Candidate } from "../app/vacancies/types/types";
+import { useState } from "react";
 
 const StyledTypography = styled(Typography)`
   height: 28vh;
@@ -19,7 +23,20 @@ const StyledTypography = styled(Typography)`
 `;
 
 export default function VacancyCard(props: VacancyCardProps) {
-  const { title, description, logo, candidates } = props;
+  const dispatch = useDispatch();
+  const { vacancyId, title, description, logo, candidates } = props;
+  const [candidatesState, setCandidatesState] = useState(candidates);
+
+  const handleApply = async () => {
+    const data: Candidate = {
+      email: sessionStorage.getItem("email"),
+      vacancyId: vacancyId,
+    };
+    const response = await dispatch<any>(addCandidate(data));
+    if (response.meta.requestStatus == "fulfilled") {
+      setCandidatesState([...candidatesState, data]);
+    }
+  };
 
   return (
     <Card
@@ -44,8 +61,8 @@ export default function VacancyCard(props: VacancyCardProps) {
           </StyledTypography>
         </CardContent>
         <CardActions>
-          <CandidatesModal candidates={candidates} />
-          <Button size="small" color="primary">
+          <CandidatesModal candidates={candidatesState} />
+          <Button onClick={handleApply} size="small" color="primary">
             Apply
           </Button>
         </CardActions>

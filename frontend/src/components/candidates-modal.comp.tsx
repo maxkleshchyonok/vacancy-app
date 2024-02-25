@@ -126,7 +126,7 @@ export default function CandidatesModal({
       <BasePopup id={id} open={open} anchor={anchor}>
         <PopupBody>
           {candidates.map((item) => (
-            <div>{item.email}</div>
+            <div key={item.vacancyId}>{item.email}</div>
           ))}
         </PopupBody>
       </BasePopup>

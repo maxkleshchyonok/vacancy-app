@@ -15,7 +15,6 @@ export interface Vacancy {
 }
 
 export interface Candidate {
-  id: string;
-  email: string;
+  email: string | null;
   vacancyId: string;
 }

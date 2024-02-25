@@ -4,6 +4,7 @@ import { Vacancy } from "./types/types";
 import { getVacancies } from "./store/vacancies.action";
 import VacancyCard from "../../components/vacancy-card.comp";
 import styled from "@emotion/styled";
+import EmailModal from "../../components/email-modal.comp";
 
 const StyledContainer = styled("div")`
   display: flex;
@@ -21,6 +22,9 @@ const StyledContainer = styled("div")`
 const Vacancies = () => {
   const dispatch = useDispatch();
   const [vacancies, setVacancies] = useState([]);
+  const email = sessionStorage.getItem("email");
+
+  const [modalActive, setModalActive] = useState(!email);
 
   useEffect(() => {
     const loadItems = async () => {
@@ -39,12 +43,14 @@ const Vacancies = () => {
       {vacancies.map((vacancy: Vacancy) => (
         <VacancyCard
           key={vacancy.id}
+          vacancyId={vacancy.id}
           title={vacancy.title}
           description={vacancy.description}
           logo={vacancy.logo}
           candidates={vacancy.candidates}
         />
       ))}
+      <EmailModal active={modalActive} setActive={setModalActive} />
     </StyledContainer>
   );
 };
