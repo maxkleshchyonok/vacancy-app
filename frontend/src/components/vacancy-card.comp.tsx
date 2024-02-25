@@ -1,14 +1,26 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Badge, Button, CardActionArea, CardActions } from "@mui/material";
-import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
+import { Button, CardActionArea, CardActions } from "@mui/material";
 import { VacancyCardProps } from "./types/vacancy-card.type";
+import CandidatesModal from "./candidates-modal.comp";
+import { styled } from "@mui/system";
+
+const StyledTypography = styled(Typography)`
+  height: 28vh;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: blue;
+  }
+`;
 
 export default function VacancyCard(props: VacancyCardProps) {
   const { title, description, logo, candidates } = props;
+
   return (
     <Card
       sx={{
@@ -27,18 +39,12 @@ export default function VacancyCard(props: VacancyCardProps) {
           <Typography gutterBottom variant="h5" component="div">
             {title}
           </Typography>
-          <Typography
-            sx={{ height: "28vh", overflowY: "auto" }}
-            variant="body2"
-            color="text.secondary"
-          >
+          <StyledTypography variant="body2" color="text.secondary">
             {description}
-          </Typography>
+          </StyledTypography>
         </CardContent>
         <CardActions>
-          <Badge badgeContent={candidates.length} color="primary">
-            <EmojiPeopleIcon />
-          </Badge>
+          <CandidatesModal candidates={candidates} />
           <Button size="small" color="primary">
             Apply
           </Button>
