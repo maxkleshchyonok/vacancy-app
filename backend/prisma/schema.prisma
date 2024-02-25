@@ -26,5 +26,6 @@ model Candidate {
   vacancyId String  @default(uuid()) @map("vacancy_id") @db.Uuid
   vacancy   Vacancy @relation(fields: [vacancyId], references: [id])
 
+  @@unique([email, vacancyId])
   @@map("candidates")
 }
